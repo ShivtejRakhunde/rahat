@@ -1,0 +1,125 @@
+{% extends 'layout.html' %} {% block body %}
+
+<style>
+  /* Apply the background image to the body */
+  html body {
+    background-color: rgb(232, 232, 237);
+    background-size: cover; /* Make the image cover the entire background */
+    background-repeat: no-repeat; /* Avoid repeating the image */
+    background-position: center; /* Center the image */
+    min-height: 100vh; /* Ensure it covers the viewport height */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  b,
+  strong {
+    font-weight: bolder;
+    color: rgb(77, 101, 182);
+  }
+
+  /* Center content and position it between navbar and footer */
+  .content-container {
+    background-image: url("{{ url_for('static', filename='images/fm.jpg') }}");
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* Push content to take up available space */
+    /* Double height and adjust for nav/footer */
+    text-align: center;
+    margin: 0px 0; /* Adjust margin to avoid overlapping nav/footer */
+
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-size: cover; /* Ensures the image covers the entire width and height */
+    background-position: center; /* Centers the image within the container */
+    width: 100%; /* Ensures the container spans the full width */
+    height: 100vh; /* Makes the container's height equal to the viewport height */
+  }
+
+  /* Style for the form container */
+  .form-container {
+    width: 600px; /* Increased width */
+    padding: 30px; /* Increased padding */
+    background: rgba(
+      255,
+      255,
+      255,
+      0.85
+    ); /* Semi-transparent white for contrast */
+    border-radius: 25px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for better visual separation */
+  }
+
+  /* Style for the form elements */
+  .form-signin input {
+    font-size: 1.2rem; /* Slightly larger input font size */
+  }
+
+  .form-signin button {
+    font-size: 1.2rem; /* Larger button text */
+    padding: 10px 20px;
+  }
+
+  #output-image {
+    max-width: 100%;
+    max-height: 300px; /* Limit image height for better fit */
+    border-radius: 10px;
+  }
+
+  @media (max-width: 991px) {
+    .form-container {
+      width: 300px;
+    }
+  }
+</style>
+
+<div class="content-container">
+  <br />
+
+  <div class="form-container">
+    <form class="form-signin" method="post" enctype="multipart/form-data">
+      <h2 style="color: black; font-size: 2rem">
+        <b>Identify the disease affecting your crop</b>
+      </h2>
+      <br />
+      <h2 class="h4 mb-3 font-weight-normal"><b>Please Upload The Image</b></h2>
+      <input
+        type="file"
+        name="file"
+        class="form-control-file"
+        id="inputfile"
+        onchange="preview_image(event)"
+        style="font-weight: bold"
+        align="center"
+      />
+      <br /><br />
+      <img id="output-image" class="rounded mx-auto d-block" />
+      <br />
+      <button
+        class="btn btn-lg btn-primary btn-block"
+        type="submit"
+        style="font-weight: bold"
+      >
+        Predict
+      </button>
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function preview_image(event) {
+    var reader = new FileReader();
+    reader.onload = function () {
+      var output = document.getElementById("output-image");
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+</script>
+
+{% endblock %}
