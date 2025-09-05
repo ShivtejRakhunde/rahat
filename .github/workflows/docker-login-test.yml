@@ -1,3 +1,4 @@
+# Force GitHub workflow registration
 name: Docker Login Test
 
 on:
