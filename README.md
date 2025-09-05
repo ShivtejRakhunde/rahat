@@ -91,3 +91,4 @@ There’s still a lot I’d love to work on to make **Rahat** even better:
 - 📱 **Build a mobile app version** to make it even more accessible on the field.
 - 🧠 **Add voice assistant feature** so farmers can talk to the system instead of typing.
 - 🔍 **Weather integration** to give real-time advice based on upcoming weather patterns.
+- #
